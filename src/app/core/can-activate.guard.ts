@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {AuthService} from './services/auth.service';
 import {catchError, map} from 'rxjs/operators';
 import {User} from './entities/user';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class CanActivateGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+	private snackBar : MatSnackBar,
   ) {
   }
 
@@ -26,7 +28,7 @@ export class CanActivateGuard implements CanActivate {
       catchError((error: Response) => {
         let status = 500;
         if (error.status === 401 || error.status === 403) { // unauthorized or forbidden //
-          status = error.status;
+		  status = error.status;
         }
         return of({ status });
       }),
@@ -35,12 +37,14 @@ export class CanActivateGuard implements CanActivate {
       map((response: { status: number } | User ) => {
         if ('status' in response) {
           if (401 === response.status || 403 === response.status) {
-            this.router.navigate(['/auth/signin']);
+			  this.snackBar.open('Vous n\'etes pas connecté');
+			this.router.navigate(['/auth/signin']);
             return false;
           }
           return true;
         } else {
           if ( !response.roles.includes('ROLE_ADMIN') && ('admin' in next.data) ) {
+			this.snackBar.open('Vous n\'avez pas les droit');
             this.router.navigate(['/auth/signin']);
             return false;
           }
