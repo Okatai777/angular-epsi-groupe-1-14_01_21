@@ -8,6 +8,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
   },
   {
+	path: 'admin',
+	canActivate: [CanActivateGuard],
+    data: { admin: true },
+    loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
+  },
+  {
     path: 'dash',
     canActivate: [CanActivateGuard],
     data: { admin: true },

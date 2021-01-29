@@ -1,0 +1,42 @@
+TP : exo 1
+ 
+ajouter des notifications pour l'utilisateur
+avec snackbar ( basic ) : https://material.angular.io/components/snack-bar/examples
+quand il modifie son profil
+quand il se déconnecte
+quand il n'a pas le droit d'accéder à la page car pas connecté
+quand il n'a pas le droit d'accéder à la page car pas admin
+
+Attention à bien importer le module MatSnackBarModule !
+
+
+TP : exo 2 
+faire une landing page ( dans le module Auth )	
+avec des liens vers la page login et la page d'inscription et un message de bienvenue
+
+
+TP: exo 3 
+partie admin
+créer un module admin ( en lazy loading )
+créer une page dédié à l'admin et un bouton dans la navigation pour y accéder quand on est connecté
+adapter le router pour rendre le dash accessible à tous les utilisateurs connectés et la partie admin uniquement accessible aux admins
+
+TP : exo 4
+partie admin ( suite ) 
+dans la page admin
+afficher un tableau qui récupère les tags
+récupérer les tag avec l'url : https://api.wecolearn.com/api/admin/tags
+afficher les données : nom, importance
+utiliser un input pour filtrer les données ! ;)
+
+BONUS 
+
+5 : suppression du tag
+ajouter un bouton ( regarder mat-icon ) sur chaque ligne qui permet de supprimer un tag 
+avec l'api : admin/tag/{id} (delete)
+
+6 : créer un formulaire de création de tag
+avec un unique champ : 'name'
+avec l'api : admin/tag ( post ) qui accepte un objet { name : string }
+
+7 : faire en sorte que le tableau se met à jour après chaque action ( delete, create )
